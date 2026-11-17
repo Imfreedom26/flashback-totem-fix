@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,8 +19,8 @@ public class TotemReplayMixin {
         Minecraft client = Minecraft.getInstance();
         if (client.level == null) return;
 
-        // EntityEvent.TALISMAN_ACTIVATE (byte 35) is the Totem of Undying pop event
-        if (packet.getEventId() == EntityEvent.TALISMAN_ACTIVATE) {
+        // 35 is the Totem of Undying pop event ID
+        if (packet.getEventId() == 35) {
             Entity targetEntity = packet.getEntity(client.level);
             Entity cameraEntity = client.getCameraEntity();
 
